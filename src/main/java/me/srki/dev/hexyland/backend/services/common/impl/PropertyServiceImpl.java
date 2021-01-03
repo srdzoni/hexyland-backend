@@ -1,9 +1,9 @@
-package me.srki.dev.hexyland.backend.services.auth.impl;
+package me.srki.dev.hexyland.backend.services.common.impl;
 
 import me.srki.dev.hexyland.backend.exceptions.model.AppPropertyNotFoundException;
 import me.srki.dev.hexyland.backend.model.entities.AppPropertyEntity;
 import me.srki.dev.hexyland.backend.model.repositories.AppPropertyRepository;
-import me.srki.dev.hexyland.backend.services.auth.PropertyService;
+import me.srki.dev.hexyland.backend.services.common.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

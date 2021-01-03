@@ -8,7 +8,7 @@ import me.srki.dev.hexyland.backend.model.dto.auth.LoginResponseDTO;
 import me.srki.dev.hexyland.backend.model.dto.auth.RegisterRequestDTO;
 import me.srki.dev.hexyland.backend.model.dto.web.MessageResponseDTO;
 import me.srki.dev.hexyland.backend.services.auth.AuthService;
-import me.srki.dev.hexyland.backend.services.auth.PropertyService;
+import me.srki.dev.hexyland.backend.services.common.PropertyService;
 import me.srki.dev.hexyland.backend.util.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
