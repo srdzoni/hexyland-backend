@@ -1,14 +1,17 @@
 package me.srki.dev.hexyland.backend.model.entities;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.tomcat.jni.Local;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-@Data
 @Entity
+@Getter
+@Setter
 @Table(name = "blog_post")
 public class BlogPostEntity extends BaseEntity {
 
@@ -29,12 +32,9 @@ public class BlogPostEntity extends BaseEntity {
     @JoinColumn(name = "author_id")
     private UserEntity author;
 
-    @ManyToMany
-    @JoinTable(
-            name = "blog_post_category",
-            joinColumns = @JoinColumn(name = "post_id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private Set<BlogCategoryEntity> categories;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    private BlogCategoryEntity category;
 
     @ManyToMany
     @JoinTable(

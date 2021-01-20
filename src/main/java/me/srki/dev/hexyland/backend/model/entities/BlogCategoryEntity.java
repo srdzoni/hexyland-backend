@@ -1,5 +1,6 @@
 package me.srki.dev.hexyland.backend.model.entities;
 
+import javax.persistence.OneToMany;
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -12,8 +13,9 @@ import java.util.Set;
 @Entity
 @Table(name = "blog_category")
 public class BlogCategoryEntity extends BaseEntity {
-    private String name;
+    private String title;
+    private String slug;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "categories")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
     private Set<BlogPostEntity> posts;
 }

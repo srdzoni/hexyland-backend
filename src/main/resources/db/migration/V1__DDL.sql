@@ -1,4 +1,4 @@
-create table if not exists "hexuser"
+create table if not exists hexuser
 (
     id serial not null
         constraint author_pk
@@ -12,14 +12,15 @@ create table if not exists "hexuser"
     active boolean default false
 );
 
+
 create unique index if not exists author_email_uindex
-    on "hexuser" (email);
+    on hexuser (email);
 
 create unique index if not exists author_id_uindex
-    on "hexuser" (id);
+    on hexuser (id);
 
 create unique index if not exists author_username_uindex
-    on "hexuser" (username);
+    on hexuser (username);
 
 create table if not exists blog_post
 (
@@ -41,52 +42,28 @@ create table if not exists blog_post
     deleted boolean default false not null,
     author_id integer not null
         constraint blog_post_user_id_fk
-            references "hexuser"
+            references hexuser,
+    category_id integer
 );
 
 create unique index if not exists blog_posts_id_uindex
     on blog_post (id);
-
-create table if not exists blog_category
-(
-    id serial not null
-        constraint blog_category_pk
-            primary key,
-    name varchar(64) not null
-);
-
-create unique index if not exists blog_category_id_uindex
-    on blog_category (id);
-
-create unique index if not exists blog_category_name_uindex
-    on blog_category (name);
 
 create table if not exists blog_tag
 (
     id serial not null
         constraint blog_tag_pk
             primary key,
-    name varchar(64) not null
+    name varchar(64) not null,
+    slug varchar(64)
 );
+
 
 create unique index if not exists blog_tag_id_uindex
     on blog_tag (id);
 
-create table if not exists blog_post_category
-(
-    id serial not null
-        constraint blog_post_category_pk
-            primary key,
-    post_id integer not null
-        constraint blog_post_category_blog_post_id_fk
-            references blog_post,
-    category_id integer not null
-        constraint blog_post_category_blog_category_id_fk
-            references blog_category
-);
-
-create unique index if not exists blog_post_category_id_uindex
-    on blog_post_category (id);
+create unique index if not exists blog_tag_slug_uindex
+    on blog_tag (slug);
 
 create table if not exists blog_post_type
 (
@@ -95,6 +72,7 @@ create table if not exists blog_post_type
             primary key,
     name integer not null
 );
+
 
 create unique index if not exists blog_post_type_id_uindex
     on blog_post_type (id);
@@ -112,6 +90,7 @@ create table if not exists blog_post_tag
             references blog_tag
 );
 
+
 create unique index if not exists blog_post_tag_id_uindex
     on blog_post_tag (id);
 
@@ -122,6 +101,8 @@ create table if not exists hexauthority
             primary key,
     name varchar(64) not null
 );
+
+
 create unique index if not exists authorities_id_uindex
     on hexauthority (id);
 
@@ -135,7 +116,7 @@ create table if not exists user_authorities
             primary key,
     user_id integer not null
         constraint user_authorities_user_id_fk
-            references "hexuser",
+            references hexuser,
     authority_id integer not null
         constraint user_authorities_authority_id_fk
             references hexauthority
@@ -143,4 +124,36 @@ create table if not exists user_authorities
 
 create unique index if not exists user_authorities_id_uindex
     on user_authorities (id);
+
+create table if not exists app_property
+(
+    id serial not null
+        constraint app_property_pk
+            primary key,
+    prop_key varchar(128) not null,
+    prop_value varchar(1024)
+);
+
+
+create unique index if not exists app_prop_key_uindex
+    on app_property (prop_key);
+
+create table if not exists blog_category
+(
+    id serial not null
+        constraint blog_category_pk
+            primary key,
+    title varchar(256) not null,
+    slug varchar(64) not null
+);
+
+
+create unique index if not exists blog_category_id_uindex
+    on blog_category (id);
+
+create unique index if not exists blog_category_slug_uindex
+    on blog_category (slug);
+
+create unique index if not exists blog_category_title_uindex
+    on blog_category (title);
 

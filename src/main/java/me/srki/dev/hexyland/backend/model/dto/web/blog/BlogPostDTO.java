@@ -1,12 +1,13 @@
-package me.srki.dev.hexyland.backend.model.dto.web;
+package me.srki.dev.hexyland.backend.model.dto.web.blog;
 
-import java.time.LocalDateTime;
 import java.util.Set;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class BlogPostDTO {
@@ -15,7 +16,7 @@ public class BlogPostDTO {
   private String plaintext;
   private String slug;
   private String author;
-  private LocalDateTime publishedAt;
+  private Long publishedAt;
   private Set<String> tags;
-  private Set<String> categories;
+  private String category;
 }
